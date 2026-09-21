@@ -1855,49 +1855,56 @@ Enter your <b>Farmer ID</b> to see your registered <b>land parcels</b> and total
         login_title = "#### 👤 किसान पहचान संख्या से खोजें" if is_hi else "#### 👤 Search by Farmer ID"
         st.markdown(login_title)
 
-        input_lbl = "किसान पहचान संख्या दर्ज करें:" if is_hi else "Enter Farmer ID:"
-        input_ph = "उदा. MP-BPL-7842" if is_hi else "e.g. MP-BPL-7842"
-        input_hlp = "जांच के लिए 'MP-BPL-7842' का उपयोग करें।" if is_hi else "Use 'MP-BPL-7842' for demo verification."
-        
-        farmer_id_input = st.text_input(
-            input_lbl,
-            placeholder=input_ph,
-            value=st.session_state.get("input_farmer_id_val", ""),
-            help=input_hlp
-        )
+        col_left, col_right = st.columns([1, 1.2])
 
-        c1, c2 = st.columns([1, 1])
-        with c1:
-            btn_verify_lbl = "🔍 पहचान जांचें" if is_hi else "🔍 Verify Record"
-            verify_clicked = st.button(btn_verify_lbl, use_container_width=True)
-        with c2:
-            btn_demo_lbl = "⚡ उदाहरण आईडी (MP-BPL-7842)" if is_hi else "⚡ Demo ID (MP-BPL-7842)"
-            demo_clicked = st.button(btn_demo_lbl, use_container_width=True)
+        with col_left:
+            input_lbl = "किसान पहचान संख्या दर्ज करें:" if is_hi else "Enter Farmer ID:"
+            input_ph = "उदा. MP-BPL-7842" if is_hi else "e.g. MP-BPL-7842"
+            input_hlp = "जांच के लिए 'MP-BPL-7842' का उपयोग करें।" if is_hi else "Use 'MP-BPL-7842' for demo verification."
+            
+            farmer_id_input = st.text_input(
+                input_lbl,
+                placeholder=input_ph,
+                value=st.session_state.get("input_farmer_id_val", ""),
+                help=input_hlp
+            )
 
-        if demo_clicked:
-            st.session_state["input_farmer_id_val"] = "MP-BPL-7842"
-            farmer_id_input = "MP-BPL-7842"
-            verify_clicked = True
+            c1, c2 = st.columns([1, 1])
+            with c1:
+                btn_verify_lbl = "🔍 पहचान जांचें" if is_hi else "🔍 Verify Record"
+                verify_clicked = st.button(btn_verify_lbl, use_container_width=True)
+            with c2:
+                btn_demo_lbl = "⚡ उदाहरण आईडी (MP-BPL-7842)" if is_hi else "⚡ Demo ID (MP-BPL-7842)"
+                demo_clicked = st.button(btn_demo_lbl, use_container_width=True)
 
-        if verify_clicked:
-            clean_id = (farmer_id_input or "").strip().upper()
-            if not clean_id:
-                err_msg = "⚠️ कृपया अपना किसान पहचान नंबर दर्ज करें।" if is_hi else "⚠️ Please enter your Farmer ID."
-                st.error(err_msg)
-            elif clean_id in AGRISTACK_DB:
-                st.session_state["authenticated_farmer"] = AGRISTACK_DB[clean_id]
-                succ_msg = f"✓ किसान रिकॉर्ड मिल गया: {AGRISTACK_DB[clean_id]['farmer_name']}" if is_hi else f"✓ Farmer Record Verified: {AGRISTACK_DB[clean_id]['farmer_name']}"
-                st.success(succ_msg)
-                st.rerun()
-            else:
-                notfound_msg = (
-                    f"❌ किसान पहचान '{clean_id}' सरकारी रिकॉर्ड में नहीं मिली।\n\n"
-                    "जांच के लिए कृपया यह उदाहरण आईडी दर्ज करें: **`MP-BPL-7842`**"
-                    if is_hi
-                    else f"❌ Farmer ID '{clean_id}' not found in state records.\n\n"
-                    "For demo testing, please use Farmer ID: **`MP-BPL-7842`**"
-                )
-                st.error(notfound_msg)
+            if demo_clicked:
+                st.session_state["input_farmer_id_val"] = "MP-BPL-7842"
+                farmer_id_input = "MP-BPL-7842"
+                verify_clicked = True
+
+            if verify_clicked:
+                clean_id = (farmer_id_input or "").strip().upper()
+                if not clean_id:
+                    err_msg = "⚠️ कृपया अपना किसान पहचान नंबर दर्ज करें।" if is_hi else "⚠️ Please enter your Farmer ID."
+                    st.error(err_msg)
+                elif clean_id in AGRISTACK_DB:
+                    st.session_state["authenticated_farmer"] = AGRISTACK_DB[clean_id]
+                    succ_msg = f"✓ किसान रिकॉर्ड मिल गया: {AGRISTACK_DB[clean_id]['farmer_name']}" if is_hi else f"✓ Farmer Record Verified: {AGRISTACK_DB[clean_id]['farmer_name']}"
+                    st.success(succ_msg)
+                    st.rerun()
+                else:
+                    notfound_msg = (
+                        f"❌ किसान पहचान '{clean_id}' सरकारी रिकॉर्ड में नहीं मिली।\n\n"
+                        "जांच के लिए कृपया यह उदाहरण आईडी दर्ज करें: **`MP-BPL-7842`**"
+                        if is_hi
+                        else f"❌ Farmer ID '{clean_id}' not found in state records.\n\n"
+                        "For demo testing, please use Farmer ID: **`MP-BPL-7842`**"
+                    )
+                    st.error(notfound_msg)
+
+        with col_right:
+            side_profile_placeholder = st.empty()
+
 
         # Active Authenticated Record Display
         farmer_data = st.session_state["authenticated_farmer"]
@@ -1910,7 +1917,7 @@ Enter your <b>Farmer ID</b> to see your registered <b>land parcels</b> and total
             farmer_code_txt = "#93C5FD" if dark_mode else "#000080"
             
             if is_hi:
-                top_profile_placeholder.markdown(
+                side_profile_placeholder.markdown(
                     f"""<div style="background-color: {farmer_box_bg}; border: 1.5px solid {farmer_box_border}; border-radius: 8px; padding: 18px 20px; margin-top: 10px;">
 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid {farmer_box_border}; padding-bottom: 10px;">
 <span style="font-weight: 800; color: {farmer_box_hdr}; font-size: 1.35rem;">👤 {farmer_data['farmer_name']}</span>
@@ -1926,7 +1933,7 @@ Enter your <b>Farmer ID</b> to see your registered <b>land parcels</b> and total
                     unsafe_allow_html=True
                 )
             else:
-                top_profile_placeholder.markdown(
+                side_profile_placeholder.markdown(
                     f"""<div style="background-color: {farmer_box_bg}; border: 1.5px solid {farmer_box_border}; border-radius: 8px; padding: 18px 20px; margin-top: 10px;">
 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid {farmer_box_border}; padding-bottom: 10px;">
 <span style="font-weight: 800; color: {farmer_box_hdr}; font-size: 1.35rem;">👤 Ramesh Chandra Patel</span>
