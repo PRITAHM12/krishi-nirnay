@@ -7,12 +7,31 @@ Integrated with AgriStack™, ICAR Agronomic Diagnostic Engine, and Mandi Realiz
 import os
 import json
 import re
+import urllib.request
 from datetime import datetime
 from PIL import Image
 import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 import base64
+
+@st.cache_data(ttl=1800)
+def get_bhopal_weather():
+    try:
+        url = (
+            "https://api.open-meteo.com/v1/forecast"
+            "?latitude=23.2599&longitude=77.4126"
+            "&current=temperature_2m,relative_humidity_2m"
+        )
+        with urllib.request.urlopen(url, timeout=5) as response:
+            data = json.loads(response.read().decode())
+        current = data["current"]
+        temp = current["temperature_2m"]
+        humidity = current["relative_humidity_2m"]
+        return f"📍 **Bhopal (HQ)** | ⛅ {temp}°C | 💧 Humidity: {humidity}%"
+    except Exception:
+        return "📍 **Bhopal (HQ)** | ⛅ 32°C | 💧 Humidity: 45%"
+
 
 @st.cache_data
 def get_image_base64(file_path):
@@ -1415,7 +1434,7 @@ st.markdown(
 <div style="color: {sub_title_color}; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">{sub_title_txt}</div>
 <!-- Live Weather Pill -->
 <div style="margin-top: 6px; display: inline-block; background: #EFF6FF; border: 1px solid #BFDBFE; color: #1D4ED8; padding: 3px 12px; border-radius: 12px; font-size: 11px; font-weight: 800; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-📍 Bhopal (HQ) | 🌤️ 32°C | 💧 Humidity: 45%
+{get_bhopal_weather()}
 </div>
 </div>
 <!-- RIGHT: Indian Emblem Logo -->
