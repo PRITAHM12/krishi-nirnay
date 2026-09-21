@@ -1820,8 +1820,9 @@ with tab1:
     tab1_text_color = "#F3F4F6" if dark_mode else "#111111"
     tab1_sub_color = "#CBD5E1" if dark_mode else "#4B5563"
     
+    top_profile_placeholder = st.empty()
     if is_hi:
-        st.markdown(
+        top_profile_placeholder.markdown(
             f"""<div class="gov-card" style="background-color: {tab1_card_bg}; border-color: {tab1_card_border};">
 <div class="gov-card-header" style="font-size: 1.25rem;">
 <span>🌾 किसान पहचान और भूमि अभिलेख</span>
@@ -1834,10 +1835,10 @@ with tab1:
             unsafe_allow_html=True
         )
     else:
-        st.markdown(
+        top_profile_placeholder.markdown(
             f"""<div class="gov-card" style="background-color: {tab1_card_bg}; border-color: {tab1_card_border};">
 <div class="gov-card-header" style="font-size: 1.25rem;">
-<span>🌾 Farmer Profile & Land Records</span>
+<span>🌾 Farmer Profile &amp; Land Records</span>
 <span class="gov-badge-verified" style="font-size: 0.85rem; padding: 4px 10px;">✓ Verified Government Record</span>
 </div>
 <p style="color: {tab1_sub_color}; font-size: 1.05rem; line-height: 1.6; margin-bottom: 6px;">
@@ -1846,6 +1847,7 @@ Enter your <b>Farmer ID</b> to see your registered <b>land parcels</b> and total
 </div>""",
             unsafe_allow_html=True
         )
+
 
     col_login, col_info = st.columns([1.1, 1], gap="large")
 
@@ -1900,7 +1902,6 @@ Enter your <b>Farmer ID</b> to see your registered <b>land parcels</b> and total
         # Active Authenticated Record Display
         farmer_data = st.session_state["authenticated_farmer"]
         if farmer_data:
-            st.markdown("---")
             farmer_box_bg = "#064E3B" if dark_mode else "#F0FDF4"
             farmer_box_border = "#059669" if dark_mode else "#86EFAC"
             farmer_box_hdr = "#A7F3D0" if dark_mode else "#166534"
@@ -1909,7 +1910,7 @@ Enter your <b>Farmer ID</b> to see your registered <b>land parcels</b> and total
             farmer_code_txt = "#93C5FD" if dark_mode else "#000080"
             
             if is_hi:
-                st.markdown(
+                top_profile_placeholder.markdown(
                     f"""<div style="background-color: {farmer_box_bg}; border: 1.5px solid {farmer_box_border}; border-radius: 8px; padding: 18px 20px; margin-top: 10px;">
 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid {farmer_box_border}; padding-bottom: 10px;">
 <span style="font-weight: 800; color: {farmer_box_hdr}; font-size: 1.35rem;">👤 {farmer_data['farmer_name']}</span>
@@ -1925,7 +1926,7 @@ Enter your <b>Farmer ID</b> to see your registered <b>land parcels</b> and total
                     unsafe_allow_html=True
                 )
             else:
-                st.markdown(
+                top_profile_placeholder.markdown(
                     f"""<div style="background-color: {farmer_box_bg}; border: 1.5px solid {farmer_box_border}; border-radius: 8px; padding: 18px 20px; margin-top: 10px;">
 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid {farmer_box_border}; padding-bottom: 10px;">
 <span style="font-weight: 800; color: {farmer_box_hdr}; font-size: 1.35rem;">👤 Ramesh Chandra Patel</span>
@@ -1940,6 +1941,7 @@ Enter your <b>Farmer ID</b> to see your registered <b>land parcels</b> and total
 </div>""",
                     unsafe_allow_html=True
                 )
+
 
             parcel_heading = "##### 📍 खेती और मंडी लाभ के लिए अपना खेत चुनें:" if is_hi else "##### 📍 Select Your Land Parcel to Calculate Profit:"
             st.markdown(parcel_heading)
