@@ -1048,7 +1048,7 @@ if not st.session_state["logged_in"]:
         st.markdown(
             """
             <div style="text-align: center; margin-bottom: 22px;">
-                <div style="font-size: 1.25rem; font-weight: 800; color: #000080; margin-top: 2px;">Government of Madhya Pradesh</div>
+                <div style="font-size: 1.25rem; font-weight: 800; color: #000080; margin-top: 2px;">प्रोजेक्ट फीनिक्स लॉगिन</div>
                 <div style="font-size: 0.8rem; color: #4B5563; margin-top: 3px;">Department of Farmer Welfare & Agriculture Development</div>
                 <div style="height: 2px; width: 100%; background: linear-gradient(90deg, #FF9933 0%, #000080 50%, #138808 100%); margin: 14px 0 12px 0;"></div>
                 <div style="font-size: 1.05rem; font-weight: 700; color: #1F2937;">
@@ -1365,7 +1365,7 @@ with st.container(key="top_utility_bar"):
     top_c1, top_c2, top_c3 = st.columns([3.0, 1.4, 2.0], gap="small")
     
     with top_c1:
-        top_state_text = "भारत सरकार | मध्य प्रदेश शासन" if is_hi else "Govt. of India | Govt. of Madhya Pradesh"
+        top_state_text = "छात्र परियोजना | एलएनसीटीएस भोपाल" if is_hi else "Student Project | LNCTS Bhopal"
         st.markdown(
             f"""<div style="display: flex; align-items: center; height: 36px; font-size: 0.88rem; font-weight: 700; color: {'#CBD5E1' if dark_mode else '#4B5563'};">
                 <span style="display: inline-flex; align-items: center; gap: 8px;">
@@ -1405,8 +1405,8 @@ dept_title_color = "#4ADE80" if dark_mode else "#138808"
 if is_hi:
     main_title_txt = "कृषि-निर्णय"
     sub_title_txt = "राष्ट्रीय कृषि निर्णय सहायता एवं मंडी विपणन प्रणाली"
-    state_title_txt = "मध्य प्रदेश शासन"
-    dept_title_txt = "किसान कल्याण तथा कृषि विकास विभाग"
+    state_title_txt = "कृषि-निर्णय प्रोटोटाइप"
+    dept_title_txt = "13वां भोपाल विज्ञान मेला 2026 सबमिशन"
 else:
     main_title_txt = "KRISHI-NIRNAY"
     sub_title_txt = "National Agriculture Decision Support System"
