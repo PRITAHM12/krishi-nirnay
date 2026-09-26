@@ -1048,10 +1048,6 @@ if not st.session_state["logged_in"]:
         st.markdown(
             """
             <div style="text-align: center; margin-bottom: 22px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/120px-Emblem_of_India.svg.png" 
-                     alt="Ashok Stambh" 
-                     style="height: 72px; width: auto; object-fit: contain; margin-bottom: 8px;">
-                <div style="font-size: 0.95rem; font-weight: 700; color: #000080; letter-spacing: 0.5px;">सत्यमेव जयते</div>
                 <div style="font-size: 1.25rem; font-weight: 800; color: #000080; margin-top: 2px;">Government of Madhya Pradesh</div>
                 <div style="font-size: 0.8rem; color: #4B5563; margin-top: 3px;">Department of Farmer Welfare & Agriculture Development</div>
                 <div style="height: 2px; width: 100%; background: linear-gradient(90deg, #FF9933 0%, #000080 50%, #138808 100%); margin: 14px 0 12px 0;"></div>
@@ -1373,7 +1369,6 @@ with st.container(key="top_utility_bar"):
         st.markdown(
             f"""<div style="display: flex; align-items: center; height: 36px; font-size: 0.88rem; font-weight: 700; color: {'#CBD5E1' if dark_mode else '#4B5563'};">
                 <span style="display: inline-flex; align-items: center; gap: 8px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/40px-Emblem_of_India.svg.png" style="height: 22px; width: auto;" alt="Govt Emblem">
                     <span>{top_state_text}</span>
                 </span>
             </div>""",
@@ -1422,7 +1417,6 @@ st.markdown(
 <div class="gov-header-container" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background-color: {header_bg}; border: 1.5px solid {header_border}; border-top: 6px solid #FF9933; border-bottom: 3px solid #138808; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 16px;">
 <!-- LEFT: MP Government Logo & Dept Text -->
 <div style="flex: 1; display: flex; align-items: center;">
-<img src="data:image/png;base64,{mp_logo_base64}" style="height: 50px; width: 50px; object-fit: contain; margin-right: 12px;" alt="MP Logo">
 <div style="line-height: 1.2; text-align: left;">
 <div style="color: {state_title_color}; font-size: 14px; font-weight: 800;">{state_title_txt}</div>
 <div style="color: {dept_title_color}; font-size: 11px; font-weight: 700; margin-top: 2px;">{dept_title_txt}</div>
@@ -1435,11 +1429,10 @@ st.markdown(
 <!-- Live Weather Pill -->
 <div style="margin-top: 6px; display: inline-block; background: #EFF6FF; border: 1px solid #BFDBFE; color: #1D4ED8; padding: 3px 12px; border-radius: 12px; font-size: 11px; font-weight: 800; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
 {get_bhopal_weather()}
+</div>s
 </div>
-</div>
-<!-- RIGHT: Indian Emblem Logo -->
+<!-- RIGHT: placeholder (emblem removed) -->
 <div style="flex: 1; display: flex; justify-content: flex-end;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" style="height: 50px; width: auto;" alt="Satyameva Jayate">
 </div>
 </div>
     """,
